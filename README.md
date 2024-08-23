@@ -20,16 +20,16 @@ This is a website for a small cake business that allows customers to browse thro
 - Admin Panel: Manage products, orders, and user accounts.  
 ## Tech Stack
 
-1) Frontend:  
+1) **Frontend:**  
 - React.js  
 - React Router for navigation
 - Bootstrap  
-2) Backend:  
+2) **Backend:**  
 - Node.js  
 - Express.js
 - MongoDB for database
 - Strapi for content management
-3) Other:
+3) **Other:**
 - Git for version control
 - Vite for react project setup
 - Used Figma for the website design

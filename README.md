@@ -45,7 +45,7 @@ This is a website for a small cake business that allows customers to browse thro
 - Clone the repository  
 ```bash  
 git clone https://github.com/SumitP911/The-Home-Baker-Website.git  
-cd cake-website
+cd The-Home-Baker-Website
 ```
 
 ## Contributing

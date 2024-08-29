@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import './Contact.scss';
 
 function Contact() {
     return (

@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef } from 'react';
+import './About.scss';
+
 
 function About(props, ref) {
     return (

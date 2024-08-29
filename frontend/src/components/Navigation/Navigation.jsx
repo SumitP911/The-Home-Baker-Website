@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import './Navigation.scss';
+
 
 function Navigation({ onHomeClick, onProductsClick, onTestimonialsClick, onAboutClick, onContactClick }) {
     return (

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
-
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import './Products.scss';
 
 function Products() {
     return (

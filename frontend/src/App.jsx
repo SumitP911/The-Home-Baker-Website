@@ -1,11 +1,11 @@
 // Importing React, React Router DOM and React-Bootstrap
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import * as ReactBootstrap from 'react-bootstrap';
+// import * as ReactBootstrap from 'react-bootstrap';
 
 // Importing all the pages and components
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
+import Navigation from './components/Navigation/Navigation';
+import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage';
 import ProductCategoryPage from './pages/ProductCategoryPage';
 import ProductsPage from './pages/ProductsPage';

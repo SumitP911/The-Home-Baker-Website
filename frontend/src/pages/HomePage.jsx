@@ -1,11 +1,11 @@
 // src/components/HomePage.jsx
 import React, { useRef } from 'react';
 
-import Home from '../components/Home.jsx';
-import Products from '../components/Products';
-import Testimonials from '../components/Testimonials';
-import About from '../components/About';
-import Contact from '../components/Contact';
+import Home from '../components/Home/Home.jsx';
+import Products from '../components/Products/Products.jsx';
+import Testimonials from '../components/Testimonials/Testimonials.jsx';
+import About from '../components/About/About.jsx';
+import Contact from '../components/Contact/Contact.jsx';
 
 function HomePage() {
 

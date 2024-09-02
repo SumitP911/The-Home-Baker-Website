@@ -1,6 +1,7 @@
 // Importing React, React Router DOM and React-Bootstrap
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './styles/global.scss';
 // import * as ReactBootstrap from 'react-bootstrap';
 
 // Importing all the pages and components

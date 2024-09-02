@@ -1,10 +1,11 @@
 @import '../../styles/variables';
 
 
-// h2 {
-//     font-family: $font-apricot;
-// }
+h2 {
+    font-family: $font-roboto, sans-serif;
+    color: $primary-brown;
+}
 
-// .row {
-//     background-color: $primary-pink;
-// }
+.Container {
+    background-color: $primary-pink;
+}

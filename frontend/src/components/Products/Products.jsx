@@ -9,10 +9,10 @@ function Products() {
             <h2 className="d-flex justify-content-center">Product Categories</h2>
             <Container className="d-flex justify-content-center my-5">
                 <Row xs={2} sm={2} md={2} lg={4} className="g-4">
-                    {Array.from({ length: 4 }).map((_, idx) => (
+                    {Array.from({ length: 8 }).map((_, idx) => (
                         <Col key={idx}>
                             <Card>
-                                <Card.Img variant="top" src="https://cdn.uengage.io/uploads/7175/image-8LDDGZ-1706080808.jpg" />
+                                <Card.Img variant="top " src="https://cdn.uengage.io/uploads/7175/image-8LDDGZ-1706080808.jpg" />
                                 <Card.Body>
                                     <Card.Title>Card title</Card.Title>
                                     <Card.Text>

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import './Products.scss';
 // import yourImage from '';

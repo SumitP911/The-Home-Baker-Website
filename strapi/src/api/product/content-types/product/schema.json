@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "unique": false,
+      "required": true,
+      "minLength": 1,
+      "maxLength": 70
+    },
+    "Description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 350,
+      "minLength": 3,
+      "default": "Product Description"
+    },
+    "Photos": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Quantity": {
+      "type": "enumeration",
+      "enum": [
+        "gm 500",
+        "kg 1",
+        "kg 2",
+        "kg 3"
+      ],
+      "required": true
+    },
+    "product_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product-category.product-category",
+      "inversedBy": "product"
+    },
+    "Price": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    }
+  }
+}

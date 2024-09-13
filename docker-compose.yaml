@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+    depends_on:
+      - strapi
+
+  strapi:
+    build: ./strapi
+    ports:
+      - '1337:1337'
+    volumes:
+      - ./strapi:/app
+      - strapi-data:/app/data
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+volumes:
+  strapi-data:
+
+
+networks:
+  app-network:

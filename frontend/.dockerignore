@@ -1,0 +1,7 @@
+# Ignore node_modules (since we install it in Docker)
+node_modules
+npm-debug.log
+
+# Ignore local environment variables
+.env
+README.md

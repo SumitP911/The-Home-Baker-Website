@@ -788,6 +788,65 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutAbout extends Schema.SingleType {
+  collectionName: 'abouts';
+  info: {
+    singularName: 'about';
+    pluralName: 'abouts';
+    displayName: 'About';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    About: Attribute.Blocks & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Description: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 1;
+        maxLength: 350;
+      }> &
+      Attribute.DefaultTo<'Home Page Description'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -814,8 +873,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       }> &
       Attribute.DefaultTo<'Product Description'>;
     Photos: Attribute.Media<'images', true> & Attribute.Required;
-    Quantity: Attribute.Enumeration<['gm 500', 'kg 1', 'kg 2', 'kg 3']> &
-      Attribute.Required;
+    QuantityType: Attribute.Enumeration<['Units', 'Kgs']> & Attribute.Required;
     product_category: Attribute.Relation<
       'api::product.product',
       'manyToOne',
@@ -829,6 +887,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
         },
         number
       >;
+    Variants: Attribute.Component<'variants.cake-variants', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -873,6 +932,16 @@ export interface ApiProductCategoryProductCategory
       'oneToMany',
       'api::product.product'
     >;
+    Description: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+        maxLength: 50;
+      }>;
+    Size: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+        maxLength: 50;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -955,6 +1024,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::about.about': ApiAboutAbout;
+      'api::home.home': ApiHomeHome;
       'api::product.product': ApiProductProduct;
       'api::product-category.product-category': ApiProductCategoryProductCategory;
       'api::testimonial.testimonial': ApiTestimonialTestimonial;

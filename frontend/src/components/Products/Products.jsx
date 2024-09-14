@@ -1,24 +1,54 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import './Products.scss';
-// import yourImage from '';
 
-function Products() {
+const ProductsCategories = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('http://localhost:1337/api/product-categories?populate=*', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    cache: 'no-cache',
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setCategories(data.data);
+                // console.log(data.data);
+            } catch (error) {
+                console.error('Error fetching product categories', error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
     return (
         <div className='ProductCategories'>
             <h2 className="d-flex justify-content-center">Product Categories</h2>
             <Container className="d-flex justify-content-center my-5">
-                <Row xs={2} sm={2} md={2} lg={4} className="g-4">
-                    {Array.from({ length: 8 }).map((_, idx) => (
-                        <Col key={idx}>
+                <Row xs={2} sm={2} md={2} lg={4} className="g-5 justify-content-center">
+                    {categories.map((category) => (
+                        <Col key={category.id}>
                             <Card>
-                                <Card.Img variant="top " src="https://cdn.uengage.io/uploads/7175/image-8LDDGZ-1706080808.jpg" />
+                                <div style={{ padding: '15px', overflow: 'hidden', borderRadius: '0.5rem' }}>
+                                    <Card.Img src={`http://localhost:1337${category.attributes.Image.data.attributes.url}`}
+                                        alt={category.attributes.Image.data.attributes.alternativeText || "Brownies Thumbnail"}
+                                    // style={{ padding: '10px' }}
+                                    // className='p-3 rounded'
+                                    />
+                                </div>
                                 <Card.Body>
-                                    <Card.Title>Card title</Card.Title>
+                                    <Card.Title>{category.attributes.Name}</Card.Title>
                                     <Card.Text>
-                                        This is a longer card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit
-                                        longer.
+                                        {category.attributes.Description}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -30,5 +60,4 @@ function Products() {
     );
 }
 
-export default forwardRef(Products);
-
+export default forwardRef(ProductsCategories);

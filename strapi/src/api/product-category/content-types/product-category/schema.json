@@ -32,6 +32,17 @@
       "relation": "oneToMany",
       "target": "api::product.product",
       "mappedBy": "product_category"
+    },
+    "Description": {
+      "type": "text",
+      "required": false,
+      "minLength": 3,
+      "maxLength": 50
+    },
+    "Size": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 50
     }
   }
 }

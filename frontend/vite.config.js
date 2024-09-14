@@ -7,5 +7,9 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',  // Bind to all network interfaces
     port: 3000,        // You can specify a different port if needed
+    esbuild: {
+      target: 'esnext',
+      platform: 'linux',
+    }
   }
 })

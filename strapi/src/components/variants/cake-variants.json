@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_variants_cake_variants",
+  "info": {
+    "displayName": "CakeVariants",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "VariantName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    }
+  }
+}

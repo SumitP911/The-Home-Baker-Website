@@ -34,13 +34,11 @@
         "images"
       ]
     },
-    "Quantity": {
+    "QuantityType": {
       "type": "enumeration",
       "enum": [
-        "gm 500",
-        "kg 1",
-        "kg 2",
-        "kg 3"
+        "Units",
+        "Kgs"
       ],
       "required": true
     },
@@ -54,6 +52,11 @@
       "type": "integer",
       "required": true,
       "min": 1
+    },
+    "Variants": {
+      "type": "component",
+      "repeatable": true,
+      "component": "variants.cake-variants"
     }
   }
 }

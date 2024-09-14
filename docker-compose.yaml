@@ -1,11 +1,13 @@
-version: '3.8'
 services:
   frontend:
     build: ./frontend
+    image: frontend-image:latest
+    container_name: frontend
     ports:
       - '3000:3000'
     volumes:
       - ./frontend:/app
+      - node_modules:/app/node_modules/
     environment:
       - NODE_ENV=development
     networks:
@@ -15,11 +17,14 @@ services:
 
   strapi:
     build: ./strapi
+    image: strapi-image:latest
+    container_name: strapi
     ports:
       - '1337:1337'
     volumes:
       - ./strapi:/app
       - strapi-data:/app/data
+      - node_modules:/app/node_modules/
     environment:
       - NODE_ENV=development
     networks:

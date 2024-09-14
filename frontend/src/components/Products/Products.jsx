@@ -2,9 +2,11 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import './Products.scss';
 
+
 const ProductsCategories = () => {
     const [categories, setCategories] = useState([]);
 
+    // Using fetch API to fetch data from Strapi
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -16,12 +18,14 @@ const ProductsCategories = () => {
                     },
                     cache: 'no-cache',
                 });
+
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
+
                 const data = await response.json();
                 setCategories(data.data);
-                // console.log(data.data);
+
             } catch (error) {
                 console.error('Error fetching product categories', error);
             }
@@ -30,6 +34,8 @@ const ProductsCategories = () => {
         fetchCategories();
     }, []);
 
+
+    // Product Category Card Function
     return (
         <div className='ProductCategories'>
             <h2 className="d-flex justify-content-center">Product Categories</h2>

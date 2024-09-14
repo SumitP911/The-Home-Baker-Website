@@ -28,11 +28,15 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+<<<<<<< HEAD
     "vite": "^5.4.1"
   },
   "overrides": {
     "vite": {
       "rollup": "npm:@rollup/wasm-node"
     }
+=======
+    "vite": "^5.4.2"
+>>>>>>> 73487a9b4d5cef1e9d3c3cebd3e94b29a4b62505
   }
 }

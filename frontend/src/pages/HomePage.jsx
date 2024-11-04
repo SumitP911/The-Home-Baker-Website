@@ -1,6 +1,4 @@
-// src/components/HomePage.jsx
-import React, { useRef } from 'react';
-
+// Importing the required components
 import Home from '../components/Home/Home.jsx';
 import Products from '../components/Products/Products.jsx';
 import Testimonials from '../components/Testimonials/Testimonials.jsx';
@@ -9,30 +7,26 @@ import Contact from '../components/Contact/Contact.jsx';
 
 function HomePage() {
 
-    const homeRef = useRef(null);
-    const productsRef = useRef(null);
-    const testimonialsRef = useRef(null);
-    const aboutRef = useRef(null);
-    const contactRef = useRef(null);
-
-    const scrollToSection = (ref) => {
-        ref.current.scrollIntoView({ behavior: 'smooth' });
-    };
-
     return (
         <div>
-            <Home ref={homeRef} />
-            <Products ref={productsRef} />
-            <Testimonials ref={testimonialsRef} />
-            <About ref={aboutRef} />
-            <Contact ref={contactRef} />
+            <section id="home">
+                <Home />
+            </section>
+            <section id="products">
+                <Products />
+            </section>
+            <section id="testimonials">
+                <Testimonials />
+            </section>
+            <section id="about">
+                <About />
+            </section>
+            <section id="contact">
+                <Contact />
+            </section>
         </div>
     );
 
 }
 
 export default HomePage;
-
-
-
-

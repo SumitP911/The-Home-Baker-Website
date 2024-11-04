@@ -1,10 +1,12 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import './Products.scss';
 
 
 const ProductsCategories = () => {
     const [categories, setCategories] = useState([]);
+    const navigate = useNavigate();
 
     // Using fetch API to fetch data from Strapi
     useEffect(() => {
@@ -35,6 +37,10 @@ const ProductsCategories = () => {
     }, []);
 
 
+    const handleCategoryClick = (categoryId) => {
+        navigate(`/productCategory/${categoryId}`); // Navigate to ProductCategoryPage with categoryId
+    };
+
     // Product Category Card Function
     return (
         <div className='ProductCategories'>
@@ -43,12 +49,10 @@ const ProductsCategories = () => {
                 <Row xs={2} sm={2} md={2} lg={4} className="g-5 justify-content-center">
                     {categories.map((category) => (
                         <Col key={category.id}>
-                            <Card>
+                            <Card onClick={() => handleCategoryClick(category.id)}>
                                 <div style={{ padding: '15px', overflow: 'hidden', borderRadius: '0.5rem' }}>
                                     <Card.Img src={`http://localhost:1337${category.attributes.Image.data.attributes.url}`}
-                                        alt={category.attributes.Image.data.attributes.alternativeText || "Brownies Thumbnail"}
-                                    // style={{ padding: '10px' }}
-                                    // className='p-3 rounded'
+                                        alt={category.attributes.Image.data.attributes.alternativeText || "Thumbnail"}
                                     />
                                 </div>
                                 <Card.Body>

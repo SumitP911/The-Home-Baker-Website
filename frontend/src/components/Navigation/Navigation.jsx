@@ -1,46 +1,45 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
+import logo from './logo-nav-main.jpeg';
+import SearchButton from './search-regular-24.png';
 import './Navigation.scss';
 
 
-function Navigation({ onHomeClick, onProductsClick, onTestimonialsClick, onAboutClick, onContactClick }) {
+function Navigation({ showScrollButtons }) {
     return (
         <>
-            <Navbar expand="lg" classNameName="bg-body-tertiary">
+            <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
                 <Container>
-                    <Image src="logo-nav-main.jpeg/100x100" />
-
-                    {/* <Navbar.Brand href="#home">The Homebaker</Navbar.Brand> */}
-                    {/* <Image className="logo-nav" src="logo-nav-main.jpeg" alt="" /> */}
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        width="50"
+                        height="50"
+                        className="d-inline-block align-top"
+                    />
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav classNameName="me-auto">
-                            {/* <li><Link onClick={onHomeClick}>Home</Link></li>
-                            <li><Link onClick={onProductsClick}>Products</Link></li>
-                            <li><Link onClick={onTestimonialsClick}>Testimonials</Link></li>
-                            <li><Link onClick={onAboutClick}>About</Link></li>
-                            <li><Link onClick={onContactClick}>Contact</Link></li> */}
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">Products</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">Testimonials</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">About</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">Contact</a>
-                                </li>
-                            </ul>
-                            {/* <!-- Search icon visible only on larger screens (lg and up) --> */}
-                            <Image className="search-nav d-none d-lg-block" src="search-regular-24.png" alt="" />
+                        <Nav className="me-auto">
+                            {/* <Link to="/">Home</Link> */}
+                            {showScrollButtons && (
+                                <>
+                                    <ScrollLink to="home" smooth={true} duration={300}>Home</ScrollLink>
+                                    <ScrollLink to="products" smooth={true} duration={300}>Products</ScrollLink>
+                                    <ScrollLink to="testimonials" smooth={true} duration={300}>Testimonials</ScrollLink>
+                                    <ScrollLink to="about" smooth={true} duration={300}>About</ScrollLink>
+                                    <ScrollLink to="contact" smooth={true} duration={300}>Contact</ScrollLink>
+                                </>
+                            )}
+                            {/* <Link to="/some-other-page">Other Page</Link> */}
+
+                            <img
+                                src={SearchButton}
+                                width="25"
+                                height="25"
+                                className="d-inline-block align-top"
+                                alt="Search Button"
+                            />
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -1,1 +1,160 @@
 @import '../../styles/variables';
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 8rem; // Offset for the navbar height
+    padding-left: 4rem;
+    padding-right: 4rem;
+    overflow: hidden;
+
+    .left-container {
+        flex-basis: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .Cake-Image {
+            max-width: 80%; // Scale down on smaller screens
+            height: auto;
+            border-radius: 10px;
+        }
+    }
+
+    .right-container {
+        flex-basis: 50%;
+        z-index: 1;
+        text-align: left;
+
+        .heading {
+            color: $primary-brown;
+            justify-content: flex-start;
+            display: flex;
+            align-items: center;
+
+            .hat-img {
+                width: 3rem;
+                height: 3rem;
+            }
+
+            .text {
+                font-family: $font-apricot;
+                font-size: 3rem;
+                font-weight: bold;
+            }
+        }
+
+        .home-section {
+            text-align: left;
+
+            .cake-detail {
+                font-family: $font-cormorant-garamond;
+                color: $secondary-brown;
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .vector-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    // Media queries for responsiveness
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        padding: 5rem 3rem;
+
+        .left-container,
+        .right-container {
+            flex-basis: 100%;
+        }
+
+        .left-container {
+            .Cake-Image {
+                max-width: 70%;
+            }
+        }
+
+        .right-container {
+            padding-top: 3rem;
+
+            .heading {
+                font-size: 2rem;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .home-section .cake-detail {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding-top: 3rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+
+        .left-container .Cake-Image {
+            max-width: 70%;
+        }
+
+        .right-container {
+            padding-top: 2rem;
+
+            .heading {
+                font-size: 1.5rem;
+                justify-content: flex-start; // Left-align heading for smaller screens
+                text-align: left;
+            }
+
+            .home-section .cake-detail {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 4rem 1rem;
+        flex-direction: column;
+
+        .left-container {
+            padding-top: 4rem;
+
+            .Cake-Image {
+                max-width: 100%;
+            }
+        }
+
+        .heading .hat-img {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .heading {
+            font-size: 1.2rem;
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        .home-section .cake-detail {
+            font-size: 0.8rem;
+        }
+    }
+}

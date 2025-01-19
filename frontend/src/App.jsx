@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import ProductCategoryPage from './pages/ProductCategoryPage';
 import ProductsPage from './pages/ProductsPage';
 
+
 const router = createBrowserRouter([
   {
     path: "/",

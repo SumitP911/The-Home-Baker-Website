@@ -4,17 +4,23 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 import placeholderImage from '../assets/images/Placeholder-Image.jpg';
 
 
+import './ProductCategoryPage.scss';
+
+
 const ProductCategoryPage = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [products, setProducts] = useState([]);
-    const [category, setCategory] = useState([]);
+    const [category, setCategory] = useState(null);
 
-    // Using fetch API to fetch data from Strapi
+
+    // Fetch all categories and filter for the selected category based on the ID
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchCategoryAndProducts = async () => {
             try {
-                const response = await fetch(`http://localhost:1337/api/product-categories/${id}?populate=products,products.Photos`, {
+                // const response = await fetch(`http://localhost:1337/api/product-categories?populate[products][populate]=*`, {
+                // const response = await fetch(`http://192.168.1.34:1337/api/product-categories?populate[products][populate]=*`, {
+                const response = await fetch(`http://192.168.174.231:1337/api/product-categories?populate[products][populate]=*`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -28,67 +34,75 @@ const ProductCategoryPage = () => {
                 }
 
                 const data = await response.json();
-                setCategory(data.data);
-                setProducts(data.data.attributes?.products?.data || []);
+                // console.log('Fetched Category Data:', data); 
+                // Debugging log
+
+                // Finding the specific category by ID, we make sure to pasrse the id always
+                const fetchedCategory = data.data.find(category => category.id === Number(id));
+
+                if (fetchedCategory) {
+                    setCategory(fetchedCategory);
+                    setProducts(fetchedCategory.products || []); // Set products from fetched category
+                    // console.log('Fetched Products: ', fetchedCategory.products);
+                }
 
             } catch (error) {
-                console.error('Error fetching products', error);
+                console.error('Error fetching category and products', error);
             }
         };
 
-        fetchProducts();
-    }, [id]); // Refetch products when categoryId changes
+        fetchCategoryAndProducts();
+    }, [id]);
 
     const handleProductClick = (productId) => {
         navigate(`/products/${productId}`);
     };
 
     // Product Category Page Card Function
-    // const imageUrl = product.attributes.Photos.data[0].attributes.url;
     return (
-        <div className="Products">
+        <div className="Products my-5">
             {category && (
-                <div>
-                    <h2 className="d-flex justify-content-center">{category.attributes?.Name || 'Category Name'}</h2>
-                    <p className="d-flex justify-content-center">{category.attributes?.Description || 'No description available'}</p>
+                <div className='category-heading mb-5'>
+                    <h2 className="d-flex justify-content-center category-name mb-2">{category?.Name || 'Category Name'}</h2>
+                    <p className="d-flex justify-content-center category-description">{category?.Description || 'No description available'}</p>
                 </div>
             )}
 
-            <Container className="d-flex justify-content-center my-5">
-                <Row xs={2} sm={2} md={2} lg={4} className="g-5 justify-content-center">
-                    {products.map((product) => {
-                        // Access the photo URL for each product
-                        const relativePhotoUrl = product.attributes?.Photos?.data?.[0]?.attributes?.url;
-                        const photoUrl = relativePhotoUrl ? `http://localhost:1337${relativePhotoUrl}` : null;
+            <Container>
+                <Row xs={1} sm={2} md={3} lg={4} className="g-4 d-flex justify-content-center">
+                    {products.length > 0 ? (
+                        products.map((product) => {
+                            const relativePhotoUrl = product.Images?.[0]?.url;
+                            // const photoUrl = relativePhotoUrl ? `http://localhost:1337${relativePhotoUrl}` : placeholderImage;
+                            // const photoUrl = relativePhotoUrl ? `http://192.168.1.34:1337${relativePhotoUrl}` : placeholderImage;
+                            const photoUrl = relativePhotoUrl ? `http://192.168.174.231:1337${relativePhotoUrl}` : placeholderImage;
 
-                        return (
-                            <Col key={product.id}>
-                                <Card onClick={() => handleProductClick(product.id)}>
-                                    <div style={{ padding: '15px', overflow: 'hidden', borderRadius: '0.5rem' }}>
-                                        {photoUrl ? (
+                            return (
+                                <Col key={product.id}>
+                                    <Card className="product-card" onClick={() => handleProductClick(product.id)}>
+                                        <div style={{ overflow: 'hidden' }}>
                                             <Card.Img
+                                                className="card-img"
                                                 src={photoUrl}
                                                 alt={product.attributes?.Name || 'Product Image'}
                                             />
-                                        ) : (
-                                            <Card.Img src={placeholderImage} alt="Cake Image" />
-                                        )}
-                                    </div>
-                                    <Card.Body>
-                                        <Card.Title>{product.attributes?.Name || 'Product Name'}</Card.Title>
-                                        <Card.Text>
-                                            {product.attributes?.Description || 'No description available'}
-                                        </Card.Text>
-                                        <Card.Text>
-                                            ₹{product.attributes?.Price || 'N/A'}/-
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        );
-                    })}
+                                        </div>
+                                        <Card.Body>
+                                            <Card.Title className='card-product-name'>{product.Name || 'Product Name'}</Card.Title>
+                                            <Card.Text className='card-product-price'>₹{product.Price || 'N/A'}/-</Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            );
+                        })
+                    ) : (
+                        <Col>
+                            <h4 className="text-center">No products available in this category</h4>
+                        </Col>
+                    )}
                 </Row>
             </Container>
+
         </div>
     );
 }

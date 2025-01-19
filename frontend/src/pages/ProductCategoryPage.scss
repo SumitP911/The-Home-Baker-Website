@@ -1,0 +1,48 @@
+@import '../styles/variables.scss';
+
+
+.category-name {
+    font-family: $font-apricot;
+    color: $primary-brown;
+}
+
+.category-description {
+    font-size: 1.3rem;
+    font-family: $font-cormorant-garamond;
+    color: $primary-brown;
+}
+
+.Container {
+    background-color: $primary-pink;
+}
+
+.product-card {
+    margin: 0 auto;
+    width: 100%; // Full width of the column
+    max-width: 20rem; // Larger max width for bigger cards
+    height: 15rem; // Fixed height for a consistent cuboid shape
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    text-align: center;
+
+    .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; // Ensures the image covers the entire card
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        border-bottom-left-radius: 0; // No rounding on the bottom corners
+        border-bottom-right-radius: 0;
+    }
+
+    .card-product-price {
+        color: $primary-brown;
+        font-family: $font-roboto, sans-serif;
+    }
+}
+
+.product-card:hover {
+    transform: scale(1.01);
+}

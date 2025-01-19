@@ -1,11 +1,47 @@
 @import '../../styles/variables';
 
-
 h2 {
     font-family: $font-roboto, sans-serif;
     color: $primary-brown;
 }
 
-.Container {
-    background-color: $primary-pink;
+.product-category-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 220px;
+    max-width: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: ease-in-out(5);
+    background: linear-gradient(to bottom, #EED2BE, #FAE6E6);
+    cursor: pointer;
+}
+
+.product-category-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.card-title {
+    text-align: center;
+    color: $primary-brown;
+    font-family: $font-maharlika, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.product-category-card .card-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.product-category-card:hover {
+    transform: scale(1.01);
 }

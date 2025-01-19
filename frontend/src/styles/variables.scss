@@ -1,18 +1,16 @@
 // Colors
-$gray: #BEBEBE;
-$cream: #F0DCC8;
-
 $primary-pink: #FAE6E6;
 $secondary-pink: #F0C8B4;
 
 $primary-brown: #783232;
 $secondary-brown: #5A0828;
 
-
-// Define custom fonts
+// Initialize custom fonts
 @font-face {
     font-family: 'Roboto';
-    src: url('../assets/fonts/Roboto.ttf') format('ttf');
+    src: url('../assets/fonts/Roboto.ttf') format('ttf'),
+        url('../assets/fonts/Roboto.woff') format('woff'),
+        url('../assets/fonts/Roboto.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -20,7 +18,9 @@ $secondary-brown: #5A0828;
 
 @font-face {
     font-family: 'CormorantGaramond';
-    src: url('../assets/fonts/CormorantGaramond.ttf') format('ttf');
+    src: url('../assets/fonts/CormorantGaramond.ttf') format('ttf'),
+        url('../assets/fonts/CormorantGaramond.woff') format('woff'),
+        url('../assets/fonts/CormorantGaramond.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -28,7 +28,9 @@ $secondary-brown: #5A0828;
 
 @font-face {
     font-family: 'Maharlika';
-    src: url('../assets/fonts/Maharlika.ttf') format('ttf');
+    src: url('../assets/fonts/Maharlika.ttf') format('ttf'),
+        url('../assets/fonts/Maharlika.woff') format('woff'),
+        url('../assets/fonts/Maharlika.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -36,12 +38,13 @@ $secondary-brown: #5A0828;
 
 @font-face {
     font-family: 'Apricot';
-    src: url('../assets/fonts/Apricot.ttf') format('ttf');
+    src: url('../assets/fonts/Apricot.ttf') format('ttf'),
+        url('../assets/fonts/Apricot.woff') format('woff'),
+        url('../assets/fonts/Apricot.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
-
 
 // Define font variables
 $font-roboto: 'Roboto';

@@ -1,1 +1,58 @@
 @import '../../styles/variables';
+
+.about-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    // opacity: 0.8;
+}
+
+// .about-section {
+//     position: relative;
+//     height: 100vh;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+
+//     // Background image with blur and dark overlay
+//     &::before {
+//         content: '';
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         right: 0;
+//         bottom: 0;
+//         background-image: url('./about-bg-image.png');
+//         /* This will be dynamically set via inline style */
+//         background-size: cover;
+//         background-position: center;
+//         background-repeat: no-repeat;
+//         background-attachment: fixed;
+//         filter: blur(5px);
+//         z-index: -1; // Make sure the overlay is behind the content
+//         opacity: 0.7;
+//         /* Darken the background */
+//     }
+// }
+
+.para {
+    color: white;
+    // border-radius: 8px;
+    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.para {
+    font-size: 1rem;
+    line-height: 1.6;
+}

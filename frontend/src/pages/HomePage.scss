@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+
+h2 {
+    font-family: $font-roboto, sans-serif;
+    color: $primary-brown;
+}
+
+.Container {
+    background-color: $primary-pink;
+}
+
+.product-category-card {
+    border-radius: 1.2rem;
+    overflow: hidden; // Ensures the card edges are consistent
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-img {
+    border-radius: 1.2rem;
+}

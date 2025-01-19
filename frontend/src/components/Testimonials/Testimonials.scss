@@ -1,0 +1,58 @@
+@import '../../styles/variables';
+
+.best-sellers,
+.testimonials {
+    color: $primary-brown;
+    background-color: $primary-pink;
+    font-family: $font-roboto, sans-serif;
+}
+
+.product-card {
+    display: flex; // Ensures consistent card sizing
+    flex-direction: column;
+    border-radius: 0.5rem; // Rounded corners for the card
+    margin: 0, auto;
+    overflow: hidden; // Ensure the content inside respects the border radius
+    height: 100%;
+    width: 100%;
+    max-width: 20rem; // Ensures consistent height for all cards
+    font-family: $font-maharlika, sans-serif;
+    justify-content: space-between;
+    background-color: rgb(240, 240, 240);
+    transition: ease-in-out(5);
+    cursor: pointer;
+
+    .card-img {
+        max-height: 8rem; // Fixed height for the image
+        object-fit: cover; // Ensuring the image is cropped to fit within the container
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        border-bottom-left-radius: 0; // No rounding on the bottom corners
+        border-bottom-right-radius: 0;
+    }
+
+}
+
+.custom-button-img {
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: transform 0.3s ease;
+    /* Smooth transition effect */
+}
+
+.custom-button-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.custom-button-img:hover {
+    transform: scale(1.1);
+    /* Enlarge the image on hover */
+}
+
+.custom-button-img:active {
+    transform: scale(1);
+    /* Return to original size when clicked */
+}

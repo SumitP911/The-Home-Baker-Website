@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "testimonials",
+  "info": {
+    "singularName": "testimonial",
+    "pluralName": "testimonials",
+    "displayName": "Testimonial"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "required": true
+    },
+    "Email": {
+      "type": "email",
+      "required": true,
+      "maxLength": 100,
+      "minLength": 1
+    },
+    "Review": {
+      "type": "text",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 300
+    }
+  }
+}

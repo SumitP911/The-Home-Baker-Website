@@ -1,1 +1,56 @@
 @import '../../styles/variables';
+
+
+.contact-left-container .contact-right-container {
+    border: none;
+    border-style: none;
+}
+
+.send-msg,
+.contact-information {
+    color: $primary-brown;
+    font-family: $font-maharlika;
+}
+
+
+Form .mb-3 {
+    color: $primary-brown;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    outline: none;
+    width: 100%;
+    box-shadow: none;
+
+    &:focus {
+        border-bottom: 2px solid #ccc;
+        box-shadow: none;
+    }
+}
+
+Form.Control {
+    border: none;
+}
+
+.custom-btn {
+    background-color: $primary-pink;
+    color: $primary-brown;
+    font-weight: bold;
+    border: none;
+    transition: ease-in-out(5);
+
+    &:hover {
+        color: $primary-brown;
+        background-color: rgb(240, 220, 220);
+    }
+}
+
+h6 {
+    color: $primary-brown;
+    font-weight: bold;
+}

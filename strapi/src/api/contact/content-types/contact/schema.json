@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "contacts",
+  "info": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "Contact",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Phone": {
+      "type": "biginteger",
+      "required": true,
+      "min": "1",
+      "max": "999999999999"
+    },
+    "Email": {
+      "type": "email",
+      "required": true,
+      "maxLength": 50,
+      "minLength": 1
+    },
+    "Location": {
+      "type": "text",
+      "required": true,
+      "maxLength": 100,
+      "minLength": 1
+    }
+  }
+}

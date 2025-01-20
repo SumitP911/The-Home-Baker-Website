@@ -22,8 +22,8 @@ const submitTestimonial = async (name, email, review, setSuccessMessage, setErro
 
     try {
         // const response = await fetch('http://localhost:1337/api/testimonials', {
-        const response = await fetch('http://192.168.1.34:1337/api/testimonials', {
-            // const response = await fetch('http://192.168.111.231:1337/api/testimonials', {
+        // const response = await fetch('http://192.168.1.34:1337/api/testimonials', {
+        const response = await fetch('http://192.168.174.231:1337/api/testimonials', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

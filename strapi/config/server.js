@@ -6,7 +6,7 @@ module.exports = ({ env }) => ({
   },
   admin: {
     auth: {
-      secret: env('ADMIN_JWT_SECRET'), // Secret for admin panel authentication
+      secret: env('ADMIN_JWT_SECRET', 'TIk6gFasG/1rKvNYE3a2ww=='), // Secret for admin panel authentication
     },
   },
   webhooks: {

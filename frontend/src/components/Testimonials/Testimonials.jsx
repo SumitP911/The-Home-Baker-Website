@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 // Import all the media
-import placeholderImage from './PlaceHolder-Cake.png';
+import placeholderImage from './Placeholder-Cake.png';
 import bestSellersIcon from './best-sellers-icon.png';
 import testimonialsIcon from './testimonials-icon.png';
 import reviewIcon from './review-icon.png';

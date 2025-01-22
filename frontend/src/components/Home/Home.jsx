@@ -11,25 +11,28 @@ function Home() {
     const [home, setHome] = useState(''); // State to store the content
     const [loading, setLoading] = useState(true); // Loading state
 
+    // Base URL for API
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
-        // fetch("http://localhost:1337/api/home")
-        // fetch("http://192.168.1.34:1337/api/home")
-        fetch("http://192.168.174.231:1337/api/home")
-            .then((response) => response.json())
+        fetch(`${API_BASE_URL}/api/home`) // Use dynamic base URL
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then((data) => {
-                const homeContent = data.data.Description || 'Default quote here';
-                // const imageUrl = data.data.image?.url || placeholderImage;
-                // setImage(imageUrl);
+                const homeContent = data.data?.Description || 'Default quote here';
                 setHome(homeContent);
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error fetching about us data:", error);
+                console.error("Error fetching home data:", error);
                 setHome('Default quote here');
-                // setImage(placeholderImage);
                 setLoading(false);
             });
-    }, []);
+    }, [API_BASE_URL]);
 
     return (
         <Container fluid className="main-container d-flex flex-column justify-content-center">

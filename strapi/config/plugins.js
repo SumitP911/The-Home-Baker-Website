@@ -6,15 +6,21 @@ module.exports = ({ env }) => ({
     },
     upload: {
         config: {
-            provider: '@strapi/provider-upload-aws-s3',
+            provider: "strapi-provider-cloudflare-r2",
             providerOptions: {
-                accessKeyId: env('R2_ACCESS_KEY_ID'),
-                secretAccessKey: env('R2_SECRET_ACCESS_KEY'),
-                region: 'auto',
-                endpoint: `https://${env('R2_ACCOUNT_ID')}.r2.cloudflarestorage.com`,
+                accessKeyId: env("CF_ACCESS_KEY_ID"),
+                secretAccessKey: env("CF_ACCESS_SECRET"),
+                endpoint: env("CF_ENDPOINT"),
                 params: {
-                    Bucket: env('R2_BUCKET_NAME'),
+                    Bucket: env("CF_BUCKET"),
                 },
+                cloudflarePublicAccessUrl: env("CF_PUBLIC_ACCESS_URL"),
+                pool: false,
+            },
+            actionOptions: {
+                upload: {},
+                uploadStream: {},
+                delete: {},
             },
         },
     },

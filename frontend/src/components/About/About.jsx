@@ -8,16 +8,18 @@ function About(props, ref) {
     const [about, setAbout] = useState(''); // State to store the content
     const [loading, setLoading] = useState(true); // Loading state
 
+    // Base URL for API
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
-        // fetch("http://localhost:1337/api/about")
-        // fetch("http://192.168.1.34:1337/api/about")
-        fetch("http://192.168.174.231:1337/api/about")
+        fetch(`${API_BASE_URL}/api/about`)
             .then((response) => response.json())
             .then((data) => {
-                // Assuming the 'About' content is in data.data.About
-                const aboutContent = data.data.About || 'Default about content if nothing is posted in Strapi.';
-                // const imageUrl = data.data.image?.url;
-                const imageUrl = data.data.image?.url || placeholderImage;
+                // Assuming the 'About' content and image URL are in data.data
+                const aboutContent = data.data?.About || 'Default about content if nothing is posted in Strapi.';
+                const relativeImageUrl = data.data?.image?.url;
+                const imageUrl = relativeImageUrl ? `${API_BASE_URL}${relativeImageUrl}` : placeholderImage;
+
                 setImage(imageUrl);
                 setAbout(aboutContent);
                 setLoading(false);
@@ -25,14 +27,18 @@ function About(props, ref) {
             .catch((error) => {
                 console.error("Error fetching about us data:", error);
                 setAbout('Default about content if nothing is posted in Strapi.');
-                // setImage(placeholderImage);
+                setImage(placeholderImage);
                 setLoading(false);
             });
-    }, []);
+    }, [API_BASE_URL]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div className="about-section p-4" style={{ backgroundImage: `url(${image})` }}>
-            <Container className='p-4'>
+            <Container className="p-4">
                 <Row className="justify-content-end">
                     <Col xs={12} md={6} lg={5} className="content-section p-0">
                         <h2 className="heading">My Story</h2>
@@ -43,7 +49,7 @@ function About(props, ref) {
                 </Row>
             </Container>
         </div>
-    )
+    );
 }
 
 export default forwardRef(About);

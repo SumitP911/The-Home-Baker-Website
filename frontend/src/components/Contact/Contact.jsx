@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 import instagramIcon from './instagram-icon.png';
@@ -10,20 +10,17 @@ import shareIcon from './share-icon.png';
 
 import './Contact.scss';
 
-// Function to handle the form submission
-const submitTestimonial = async (name, email, review, setSuccessMessage, setErrorMessage) => {
+const submitTestimonial = async (name, email, review, setSuccessMessage, setErrorMessage, API_BASE_URL) => {
     const testimonialData = {
         data: {
             Name: name,
             Email: email,
             Review: review,
-        }
+        },
     };
 
     try {
-        // const response = await fetch('http://localhost:1337/api/testimonials', {
-        // const response = await fetch('http://192.168.1.34:1337/api/testimonials', {
-        const response = await fetch('http://192.168.174y.231:1337/api/testimonials', {
+        const response = await fetch(`${API_BASE_URL}/api/testimonials`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -45,32 +42,32 @@ const submitTestimonial = async (name, email, review, setSuccessMessage, setErro
 };
 
 function Contact() {
-    const [contactInfo, setContactInfo] = useState(null); // State to store the contact data
-    const [loading, setLoading] = useState(true); // Loading 
+    const [contactInfo, setContactInfo] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [review, setReview] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
-        // fetch("http://localhost:1337/api/contact")
-        // fetch("http://192.168.1.34:1337/api/contact")
-        fetch("http://192.168.174.231:1337/api/contact")
-            .then(response => response.json())
-            .then(data => {
-                setContactInfo(data.data); // Assuming only one contact entry
+        fetch(`${API_BASE_URL}/api/contact`)
+            .then((response) => response.json())
+            .then((data) => {
+                setContactInfo(data.data);
                 setLoading(false);
             })
-            .catch(error => {
-                console.error("Error fetching contact data:", error);
+            .catch((error) => {
+                console.error('Error fetching contact data:', error);
                 setLoading(false);
             });
-    }, []);
+    }, [API_BASE_URL]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitTestimonial(name, email, review, setSuccessMessage, setErrorMessage);
+        submitTestimonial(name, email, review, setSuccessMessage, setErrorMessage, API_BASE_URL);
         setName('');
         setEmail('');
         setReview('');
@@ -87,7 +84,6 @@ function Contact() {
     return (
         <Container fluid className="contact-main-div p-4">
             <Row className="g-5">
-                {/* Contact Form Section */}
                 <Col md={6} className="contact-left-container">
                     <div className="contact-form">
                         <h3 className="send-msg m-5 text-center">Leave a Review</h3>
@@ -132,69 +128,64 @@ function Contact() {
                     </div>
                 </Col>
 
-                {/* Contact Information Section */}
                 <Col md={6} className="contact-right-container">
                     <div className="container-fluid px-0 mb-3">
                         <h3 className="contact-information text-center m-5">Contact Information</h3>
-                        <div className='mb-4'>
+                        <div className="mb-4">
                             <Row>
                                 <Col md={6}>
-                                    <div className='d-flex'>
+                                    <div className="d-flex">
                                         <img
                                             src={phoneIcon}
                                             alt="Phone Icon"
                                             height="20"
                                             width="20"
-                                            className='me-1' />
+                                            className="me-1"
+                                        />
                                         <h6>Phone Number</h6>
                                     </div>
-                                    <p>
-                                        +91 {contactInfo.Phone}
-                                    </p>
+                                    <p>+91 {contactInfo.Phone}</p>
                                 </Col>
                                 <Col md={6}>
-                                    <div className='d-flex'>
+                                    <div className="d-flex">
                                         <img
                                             src={emailIcon}
-                                            alt="Phone Icon"
+                                            alt="Email Icon"
                                             height="20"
                                             width="20"
-                                            className='me-1' />
+                                            className="me-1"
+                                        />
                                         <h6>Email</h6>
                                     </div>
-                                    <p>
-                                        {contactInfo.Email}
-                                    </p>
+                                    <p>{contactInfo.Email}</p>
                                 </Col>
                             </Row>
-
                             <Row>
                                 <Col md={6}>
-                                    <div className='d-flex'>
+                                    <div className="d-flex">
                                         <img
                                             src={locationIcon}
-                                            alt="Phone Icon"
+                                            alt="Location Icon"
                                             height="20"
                                             width="20"
-                                            className='me-1' />
+                                            className="me-1"
+                                        />
                                         <h6>Location</h6>
                                     </div>
-                                    <p>
-                                        {contactInfo.Location}
-                                    </p>
+                                    <p>{contactInfo.Location}</p>
                                 </Col>
                                 <Col md={6}>
-                                    <div className='d-flex'>
+                                    <div className="d-flex">
                                         <img
                                             src={shareIcon}
-                                            alt="Phone Icon"
+                                            alt="Share Icon"
                                             height="20"
                                             width="20"
-                                            className='me-1' />
+                                            className="me-1"
+                                        />
                                         <h6>Connect</h6>
                                     </div>
                                     <div className="social-links d-flex">
-                                        {/* Instagram Icon */}
                                         <a
                                             href="https://www.instagram.com/the__homebaker?igsh=czdhcjhraGt2b3pt"
                                             target="_blank"
@@ -208,8 +199,6 @@ function Contact() {
                                                 height="25"
                                             />
                                         </a>
-
-                                        {/* Facebook Icon */}
                                         <a
                                             href="https://www.facebook.com/mitali.dukale?mibextid=ZbWKwL"
                                             target="_blank"
@@ -226,7 +215,6 @@ function Contact() {
                                 </Col>
                             </Row>
                         </div>
-
                         <div className="map">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3783.2900148174485!2d73.77837!3d18.515791999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDMwJzU2LjkiTiA3M8KwNDYnNDIuMSJF!5e0!3m2!1sen!2sin!4v1736920791784!5m2!1sen!2sin"

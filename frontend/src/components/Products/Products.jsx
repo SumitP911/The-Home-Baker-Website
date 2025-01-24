@@ -4,20 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import placeholderImage from '../../assets/images/Placeholder-Image.jpg';
 import './Products.scss';
 
-
 const ProductsCategories = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true); // State for loading
     const navigate = useNavigate();
+
+    // Base URL for API
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     // Fetching categories from Strapi
     useEffect(() => {
         const fetchCategories = async () => {
             setLoading(true); // Set loading to true when fetching starts
             try {
-                // const response = await fetch('http://localhost:1337/api/product-categories?populate=*', {
-                // const response = await fetch('http://192.168.1.34:1337/api/product-categories?populate=*', {
-                const response = await fetch('http://192.168.174.231:1337/api/product-categories?populate=*', {
+                const response = await fetch(`${API_BASE_URL}/api/product-categories?populate=*`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -31,9 +31,6 @@ const ProductsCategories = () => {
                 }
 
                 const data = await response.json();
-                // console.log(data);
-                // Used to check data
-
                 setCategories(data.data || []); // Ensure categories is set to an empty array if no data
             } catch (error) {
                 console.error('Error fetching product categories:', error);
@@ -43,7 +40,7 @@ const ProductsCategories = () => {
         };
 
         fetchCategories();
-    }, []);
+    }, [API_BASE_URL]);
 
     const handleCategoryClick = (categoryId) => {
         navigate(`/productCategory/${categoryId}`); // Navigate to ProductCategoryPage with categoryId
@@ -74,9 +71,7 @@ const ProductsCategories = () => {
                                             <div style={{ overflow: 'hidden' }}>
                                                 {category?.Image ? (
                                                     <Card.Img
-                                                        // src={`http://localhost:1337${category.Image.url}`}
-                                                        // src={`http://192.168.1.34:1337${category.Image.url}`}
-                                                        src={`http://192.168.174.231:1337${category.Image.url}`}
+                                                        src={`${API_BASE_URL}${category.Image.url}`}
                                                         className="card-img"
                                                     />
                                                 ) : (

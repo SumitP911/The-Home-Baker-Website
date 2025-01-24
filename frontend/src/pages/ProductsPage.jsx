@@ -4,7 +4,6 @@ import { Card, Container, Row, Col, Carousel } from 'react-bootstrap';
 import placeholderImage from '../assets/images/Placeholder-Image-1.jpeg';
 import './ProductsPage.scss';
 
-
 const ProductPage = () => {
     const { id } = useParams();
     const [product, setProduct] = useState();
@@ -12,11 +11,13 @@ const ProductPage = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    // Base URL for API
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         // Fetching testimonials and best sellers data
         Promise.all([
-            // fetch('http://192.168.1.34:1337/api/products?populate=*').then(res => res.json())
-            fetch('http://192.168.174.231:1337/api/products?populate=*').then(res => res.json())
+            fetch(`${API_BASE_URL}/api/products?populate=*`).then(res => res.json())
         ])
             .then(([productData]) => {
                 const specificProduct = productData.data.find(item => item.id === parseInt(id));
@@ -34,7 +35,7 @@ const ProductPage = () => {
                 console.error('Error fetching data:', error);
                 setLoading(false);
             });
-    }, [id]);
+    }, [id, API_BASE_URL]);
 
     if (loading) return <div>Loading...</div>;
     if (!product) return <div>Product not found</div>;
@@ -66,8 +67,7 @@ const ProductPage = () => {
                     <Row xs={1} md={2} lg={4} className="g-4 ">
                         {bestSellers.slice(0, 8).map(product => {
                             const relativePhotoUrl = product.Images?.[0]?.url;
-                            // const photoUrl = relativePhotoUrl ? `http://192.168.1.34:1337${relativePhotoUrl}` : placeholderImage;
-                            const photoUrl = relativePhotoUrl ? `http://192.168.174.231:1337${relativePhotoUrl}` : placeholderImage;
+                            const photoUrl = relativePhotoUrl ? `${API_BASE_URL}${relativePhotoUrl}` : placeholderImage;
 
                             return (
                                 <Col key={product.id} className="d-flex justify-content-center">
@@ -97,7 +97,6 @@ const ProductPage = () => {
                 )}
             </div>
         </Container>
-
     );
 };
 
@@ -108,8 +107,7 @@ const ProductCarousel = ({ images }) => (
                 <Carousel.Item key={index} className="carousel-item">
                     <img
                         className="d-block w-100 h-100"
-                        // src={`http://192.168.1.34:1337${image.url}`}
-                        src={`http://192.168.174.231:1337${image.url}`}
+                        src={`${import.meta.env.VITE_API_BASE_URL}${image.url}`}
                         alt={image.name || 'Product Image'}
                     />
                 </Carousel.Item>
@@ -146,9 +144,7 @@ Thank you!`;
             <h2 className='product-name mb-3'>{product.Name || 'Product Name'}</h2>
             <p className='product-description'>{product.Description || 'No description available.'}</p>
 
-
             <h4 className='product-price'>{product?.Price ? `₹${product.Price}/-` : 'N/A'}</h4>
-
 
             <div
                 className="custom-button mt-3"

@@ -6,21 +6,19 @@ import './Products.scss';
 
 const ProductsCategories = () => {
     const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true); // State for loading
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Base URL for API
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    // Fetching categories from Strapi
     useEffect(() => {
         const fetchCategories = async () => {
-            setLoading(true); // Set loading to true when fetching starts
+            setLoading(true);
             try {
                 const response = await fetch(`${API_BASE_URL}/api/product-categories?populate=*`, {
                     method: 'GET',
                     headers: {
-                        'Accept': 'application/json',
+                        Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
                     cache: 'no-cache',
@@ -31,11 +29,12 @@ const ProductsCategories = () => {
                 }
 
                 const data = await response.json();
-                setCategories(data.data || []); // Ensure categories is set to an empty array if no data
+                console.log('Fetched categories:', data); // Debugging log
+                setCategories(data.data || []);
             } catch (error) {
                 console.error('Error fetching product categories:', error);
             } finally {
-                setLoading(false); // Set loading to false after the fetch is complete
+                setLoading(false);
             }
         };
 
@@ -43,12 +42,19 @@ const ProductsCategories = () => {
     }, [API_BASE_URL]);
 
     const handleCategoryClick = (categoryId) => {
-        navigate(`/productCategory/${categoryId}`); // Navigate to ProductCategoryPage with categoryId
+        navigate(`/productCategory/${categoryId}`);
     };
 
-    // Product Category Card Function
+    const getImageUrl = (imageObj) => {
+        // Ensure the image object is valid
+        if (!imageObj) return placeholderImage;
+
+        // Use thumbnail URL if available, otherwise the main URL
+        return imageObj.formats?.thumbnail?.url || imageObj.url || placeholderImage;
+    };
+
     return (
-        <div className='p-3 mb-5 mt-5'>
+        <div className="p-3 mb-5 mt-5">
             <h2 className="d-flex justify-content-center mb-5">PRODUCT CATEGORIES</h2>
             <Container className="d-flex justify-content-center px-0 my-0">
                 {loading ? (
@@ -69,18 +75,11 @@ const ProductsCategories = () => {
                                         <Card.Body className="d-flex flex-column">
                                             <Card.Title>{category?.Name || 'Unnamed Category'}</Card.Title>
                                             <div style={{ overflow: 'hidden' }}>
-                                                {category?.Image ? (
-                                                    <Card.Img
-                                                        src={`${API_BASE_URL}${category.Image.url}`}
-                                                        className="card-img"
-                                                    />
-                                                ) : (
-                                                    <Card.Img
-                                                        src={placeholderImage}
-                                                        alt="Product Category Image"
-                                                        className="card-img"
-                                                    />
-                                                )}
+                                                <Card.Img
+                                                    src={getImageUrl(category?.Image)}
+                                                    alt={category?.Name || 'Product Category'}
+                                                    className="card-img"
+                                                />
                                             </div>
                                         </Card.Body>
                                     </Card>
@@ -92,6 +91,6 @@ const ProductsCategories = () => {
             </Container>
         </div>
     );
-}
+};
 
 export default forwardRef(ProductsCategories);

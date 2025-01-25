@@ -91,8 +91,10 @@ function Testimonials() {
                     {bestSellers.length > 0 ? (
                         <Row xs={1} md={1} lg={2} className="g-4 justify-content-center">
                             {bestSellers.slice(0, 4).map(product => {
-                                const relativePhotoUrl = product.Images?.[0]?.url;
-                                const photoUrl = relativePhotoUrl ? `${API_BASE_URL}${relativePhotoUrl}` : placeholderImage;
+                                const imageUrl =
+                                    product.Images?.[0]?.url ||
+                                    product.Images?.[0]?.formats?.thumbnail?.url ||
+                                    placeholderImage;
 
                                 return (
                                     <Col key={product.id} className="d-flex justify-content-center">
@@ -100,8 +102,8 @@ function Testimonials() {
                                             <div style={{ overflow: 'hidden' }}>
                                                 <Card.Img
                                                     className="card-img"
-                                                    src={photoUrl}
-                                                    alt={product.attributes?.Name || 'Product Image'}
+                                                    src={imageUrl.startsWith('http') ? imageUrl : `${API_BASE_URL}${imageUrl}`}
+                                                    alt={product.Name || 'Product Image'}
                                                 />
                                             </div>
                                             <Card.Body>

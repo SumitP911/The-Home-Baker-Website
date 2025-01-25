@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 const AutoPing = () => {
     useEffect(() => {
         const pingInterval = setInterval(() => {
-            fetch('https://your-strapi-backend-url/health-check')  // Replace with your health-check endpoint
+            fetch('https://the-home-baker-website.onrender.com/health-check')
                 .then(response => response.json())
                 .then(data => {
                     console.log('Ping successful:', data);

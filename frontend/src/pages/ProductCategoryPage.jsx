@@ -72,10 +72,10 @@ const ProductCategoryPage = () => {
                 <Row xs={1} sm={2} md={3} lg={4} className="g-4 d-flex justify-content-center">
                     {products.length > 0 ? (
                         products.map((product) => {
-                            const relativePhotoUrl = product.Images?.[0]?.url;
-                            const photoUrl = relativePhotoUrl
-                                ? `${API_BASE_URL}${relativePhotoUrl}`
-                                : placeholderImage;
+                            const imageUrl =
+                                product.Images?.[0]?.url ||
+                                product.Images?.[0]?.formats?.thumbnail?.url ||
+                                placeholderImage;
 
                             return (
                                 <Col key={product.id}>
@@ -86,8 +86,8 @@ const ProductCategoryPage = () => {
                                         <div style={{ overflow: 'hidden' }}>
                                             <Card.Img
                                                 className="card-img"
-                                                src={photoUrl}
-                                                alt={product.attributes?.Name || 'Product Image'}
+                                                src={imageUrl.startsWith('http') ? imageUrl : `${API_BASE_URL}${imageUrl}`}
+                                                alt={product.Name || 'Product Image'}
                                             />
                                         </div>
                                         <Card.Body>

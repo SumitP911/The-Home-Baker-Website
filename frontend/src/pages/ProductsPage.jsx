@@ -15,7 +15,7 @@ const ProductPage = () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
-        // Fetching testimonials and best sellers data
+        // Fetching product and best sellers data
         Promise.all([
             fetch(`${API_BASE_URL}/api/products?populate=*`).then(res => res.json())
         ])
@@ -41,7 +41,7 @@ const ProductPage = () => {
     if (!product) return <div>Product not found</div>;
 
     const handleProductClick = (productId) => {
-        navigate(`/products/${productId}`);  // Navigate to the product page
+        navigate(`/products/${productId}`); // Navigate to the product page
     };
 
     return (
@@ -64,10 +64,12 @@ const ProductPage = () => {
             <div className="best-seller mt-4 mb-4 justify-content-center">
                 <h3 className="mb-5">Best Sellers</h3>
                 {bestSellers.length > 0 ? (
-                    <Row xs={1} md={2} lg={4} className="g-4 ">
+                    <Row xs={1} md={2} lg={4} className="g-4">
                         {bestSellers.slice(0, 8).map(product => {
-                            const relativePhotoUrl = product.Images?.[0]?.url;
-                            const photoUrl = relativePhotoUrl ? `${API_BASE_URL}${relativePhotoUrl}` : placeholderImage;
+                            const imageUrl =
+                                product.Images?.[0]?.url ||
+                                product.Images?.[0]?.formats?.thumbnail?.url ||
+                                placeholderImage;
 
                             return (
                                 <Col key={product.id} className="d-flex justify-content-center">
@@ -75,8 +77,8 @@ const ProductPage = () => {
                                         <div style={{ overflow: 'hidden' }}>
                                             <Card.Img
                                                 className="card-img"
-                                                src={photoUrl}
-                                                alt={product.attributes?.Name || 'Product Image'}
+                                                src={imageUrl.startsWith('http') ? imageUrl : `${API_BASE_URL}${imageUrl}`}
+                                                alt={product.Name || 'Product Image'}
                                             />
                                         </div>
                                         <Card.Body>
@@ -103,15 +105,20 @@ const ProductPage = () => {
 const ProductCarousel = ({ images }) => (
     <Carousel className="product-carousel">
         {images && images.length > 0 ? (
-            images.map((image, index) => (
-                <Carousel.Item key={index} className="carousel-item">
-                    <img
-                        className="d-block w-100 h-100"
-                        src={`${import.meta.env.VITE_API_BASE_URL}${image.url}`}
-                        alt={image.name || 'Product Image'}
-                    />
-                </Carousel.Item>
-            ))
+            images.map((image, index) => {
+                const imageUrl =
+                    image.url || image.formats?.large?.url || image.formats?.thumbnail?.url || placeholderImage;
+
+                return (
+                    <Carousel.Item key={index} className="carousel-item">
+                        <img
+                            className="d-block w-100 h-100"
+                            src={imageUrl.startsWith('http') ? imageUrl : `${import.meta.env.VITE_API_BASE_URL}${imageUrl}`}
+                            alt={image.name || 'Product Image'}
+                        />
+                    </Carousel.Item>
+                );
+            })
         ) : (
             <Carousel.Item className="carousel-item">
                 <img

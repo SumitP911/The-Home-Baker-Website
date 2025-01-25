@@ -3,12 +3,13 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './styles/global.scss';
 
+// Import the AutoPing component
+import AutoPing from './components/AutoPing/AutoPing.jsx';
 
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/HomePage';
 import ProductCategoryPage from './pages/ProductCategoryPage';
 import ProductsPage from './pages/ProductsPage';
-
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      {/* Include the AutoPing component to run in the background */}
+      <AutoPing />
+
+      {/* Router for the app */}
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

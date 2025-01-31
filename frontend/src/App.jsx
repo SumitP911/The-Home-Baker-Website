@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './styles/global.scss';
 
 // Import the AutoPing component
-import AutoPing from './components/AutoPing/AutoPing.jsx';
+import AutoPing from './components/AutoPing/AutoPing';
 
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/HomePage';

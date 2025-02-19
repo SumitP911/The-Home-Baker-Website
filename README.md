@@ -10,14 +10,7 @@ This is a website for a small cake business that allows customers to browse thro
 - [Setup and Installation](#Setup-and-Installation)
 - [Contributing](#Contributing)
 - [Contact](#Contact)
-## Key Features
 
-- Product Catalog: Browse cakes by categories.  
-- Customization: Customize cakes based on size, flavor, and toppings.  
-- Shopping Cart: Add cakes to the shopping cart and proceed to checkout.  
-- User Authentication: Register, login, and manage user accounts.  
-- Order Management: Users can view order history and track their orders.  
-- Admin Panel: Manage products, orders, and user accounts.  
 ## Tech Stack
 
 1) **Frontend:**  
